@@ -5,6 +5,9 @@ members = [
   "crates/runtime",
   "crates/pallets/starknet/runtime_api/",
   "crates/pallets/starknet",
+  "crates/pallets/orderbook",
+  "crates/pallets/oracle",
+  "crates/pallets/wuw",
   "crates/primitives/genesis-config/",
   "crates/primitives/digest-log",
   "crates/primitives/snos-output",
@@ -39,6 +42,9 @@ default-members = [
   "crates/runtime",
   "crates/pallets/starknet/runtime_api/",
   "crates/pallets/starknet",
+  "crates/pallets/orderbook",
+  "crates/pallets/oracle",
+  "crates/pallets/wuw",
   "crates/primitives/genesis-config/",
   "crates/primitives/digest-log",
   "crates/primitives/transactions",
@@ -132,6 +138,10 @@ sp-consensus-grandpa = { git = "https://github.com/massalabs/polkadot-sdk", bran
 sp-timestamp = { git = "https://github.com/massalabs/polkadot-sdk", branch = "release-polkadot-v1.3.0-std", default-features = false, features = [
   "std",
 ] }
+
+sp-keystore = { git = "https://github.com/massalabs/polkadot-sdk", branch = "release-polkadot-v1.3.0-std", default-features = false, features = [
+  "std",
+] }
 sp-inherents = { git = "https://github.com/massalabs/polkadot-sdk", branch = "release-polkadot-v1.3.0-std", default-features = false, features = [
   "std",
 ] }
@@ -212,6 +222,7 @@ prometheus-endpoint = { package = "substrate-prometheus-endpoint", version = "0.
 pallet-aura = { default-features = true, git = "https://github.com/massalabs/polkadot-sdk", branch = "release-polkadot-v1.3.0-std" }
 pallet-grandpa = { default-features = true, git = "https://github.com/massalabs/polkadot-sdk", branch = "release-polkadot-v1.3.0-std" }
 pallet-timestamp = { default-features = true, git = "https://github.com/massalabs/polkadot-sdk", branch = "release-polkadot-v1.3.0-std" }
+pallet-balances = { default-features = true, git = "https://github.com/massalabs/polkadot-sdk", branch = "release-polkadot-v1.3.0-std" }
 
 # Madara pallets
 pallet-starknet = { path = "crates/pallets/starknet", default-features = false, features = [
@@ -220,6 +231,13 @@ pallet-starknet = { path = "crates/pallets/starknet", default-features = false, 
 pallet-starknet-runtime-api = { path = "crates/pallets/starknet/runtime_api", default-features = false, features = [
   "std",
 ] }
+
+# WUW pallet
+pallet-orderbook = { path = "crates/pallets/orderbook", default-features = false }
+pallet-oracle = { path = "crates/pallets/oracle", default-features = false }
+pallet-wuw = { path = "crates/pallets/wuw", default-features = false }
+
+
 # Madara primtitives
 mp-genesis-config = { path = "crates/primitives/genesis-config", default-features = false }
 mp-digest-log = { path = "crates/primitives/digest-log", default-features = false }

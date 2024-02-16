@@ -43,7 +43,7 @@ use sp_api::impl_runtime_apis;
 use sp_consensus_aura::sr25519::AuthorityId as AuraId;
 use sp_core::crypto::KeyTypeId;
 use sp_core::OpaqueMetadata;
-use sp_runtime::traits::{BlakeTwo256, Block as BlockT, NumberFor};
+use sp_runtime::traits::{BlakeTwo256, Block as BlockT, NumberFor, IdentifyAccount};
 use sp_runtime::transaction_validity::{TransactionSource, TransactionValidity};
 #[cfg(any(feature = "std", test))]
 pub use sp_runtime::BuildStorage;
@@ -58,6 +58,18 @@ use starknet_api::transaction::{Calldata, Event as StarknetEvent, Fee, MessageTo
 /// Import the types.
 pub use types::*;
 
+pub use frame_support::__private::log;
+pub use pallet_balances;
+
+/// Import the WUW offchain pallet.
+pub use pallet_orderbook;
+pub use pallet_oracle;
+use pallet_oracle::Event as OracleEvent;
+
+/// Import the WUW call pallet.
+pub use pallet_wuw;
+use crate::pallet_oracle::Call as OracleCall;
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
     pub struct Runtime {
@@ -67,6 +79,12 @@ construct_runtime!(
         Grandpa: pallet_grandpa,
         // Include Starknet pallet.
         Starknet: pallet_starknet,
+        Balances:pallet_balances,
+        // Include WUW offchain pallet
+        Orderbook: pallet_orderbook,
+        Oracle: pallet_oracle,
+        // Include WUW pallet
+        WUWModule: pallet_wuw,
     }
 );
 
@@ -76,6 +94,10 @@ pub type Address = sp_runtime::MultiAddress<AccountId, ()>;
 pub type Header = generic::Header<BlockNumber, BlakeTwo256>;
 /// Block type as expected by this runtime.
 pub type Block = generic::Block<Header, UncheckedExtrinsic>;
+
+/// Some way of identifying an account on the chain. We intentionally make it equivalent
+/// to the public key of our transaction signing scheme.
+// pub type AccountId = <<Signature as Verify>::Signer as IdentifyAccount>::AccountId;
 
 /// The SignedExtension to the basic transaction logic.
 pub type SignedExtra = (

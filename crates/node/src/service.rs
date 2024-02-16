@@ -183,6 +183,32 @@ where
         madara_backend.clone(),
     )?;
 
+    // TODO check keystore and offchain worker key management
+    let keystore = keystore_container.keystore();
+    if config.offchain_worker.enabled {
+        // Initialize seed for signing transaction using offchain workers. This is a convenience
+        // so learners can see the transactions submitted simply running the node.
+        // Typically these keys should be inserted with RPC calls to `author_insertKey`.
+
+        {
+            sp_keystore::Keystore::sr25519_generate_new(
+                &*keystore,
+                madara_runtime::pallet_orderbook::KEY_TYPE,
+               //  madara_runtime::pallet_template::KEY_TYPE,
+                Some("//Alice"),
+            ).expect("Creating key Orderbook with account Alice should succeed.");
+        }
+        {
+            sp_keystore::Keystore::sr25519_generate_new(
+                &*keystore,
+                madara_runtime::pallet_oracle::KEY_TYPE,
+               //  madara_runtime::pallet_template::KEY_TYPE,
+                Some("//Alice"),
+            ).expect("Creating key Oracle with account Alice should succeed.");
+        }
+           
+    }
+
     Ok(sc_service::PartialComponents {
         client,
         backend,

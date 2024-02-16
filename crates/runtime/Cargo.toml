@@ -52,6 +52,12 @@ frame-system-benchmarking = { workspace = true, optional = true }
 pallet-starknet = { workspace = true }
 pallet-starknet-runtime-api = { workspace = true }
 
+# WUW pallet
+pallet-orderbook = { workspace = true }
+pallet-oracle = { workspace = true }
+pallet-wuw = { workspace = true }
+pallet-balances = { workspace = true }
+
 # Madara Primitives
 mp-block = { workspace = true }
 mp-chain-id = { workspace = true }
@@ -74,6 +80,9 @@ substrate-wasm-builder = { workspace = true }
 std = [
   # Madara pallets
   "pallet-starknet/std",
+  "pallet-orderbook/std",
+  "pallet-balances/std",
+  "pallet-wuw/std",
   # Frame dependencies
   "frame-try-runtime?/std",
   "frame-system-benchmarking?/std",

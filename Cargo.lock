@@ -5944,6 +5944,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "lite-json"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cd0e787ffe1153141a0f6f6d759fdf1cc34b1226e088444523812fd412a5cca2"
+dependencies = [
+ "lite-parser",
+]
+
+[[package]]
+name = "lite-parser"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c3d5f9dc37c52d889a21fd701983d02bb6a84f852c5140a6c80ef4557f7dc29e"
+dependencies = [
+ "paste",
+]
+
+[[package]]
 name = "lock_api"
 version = "0.4.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6065,7 +6083,7 @@ dependencies = [
 
 [[package]]
 name = "madara"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "async-trait",
  "blockifier",
@@ -6125,6 +6143,7 @@ dependencies = [
  "sp-core 21.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
  "sp-inherents",
  "sp-keyring",
+ "sp-keystore 0.27.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
  "sp-offchain",
  "sp-runtime 24.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
  "sp-state-machine 0.28.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
@@ -6142,7 +6161,7 @@ dependencies = [
 
 [[package]]
 name = "madara-runtime"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "blockifier",
  "frame-benchmarking",
@@ -6161,10 +6180,14 @@ dependencies = [
  "mp-simulations",
  "mp-transactions",
  "pallet-aura",
+ "pallet-balances",
  "pallet-grandpa",
+ "pallet-oracle",
+ "pallet-orderbook",
  "pallet-starknet",
  "pallet-starknet-runtime-api",
  "pallet-timestamp",
+ "pallet-wuw",
  "parity-scale-codec",
  "scale-info",
  "serde",
@@ -6269,7 +6292,7 @@ checksum = "60302e4db3a61da70c0cb7991976248362f30319e88850c487b9b95bbf059e00"
 
 [[package]]
 name = "mc-commitment-state-diff"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "blockifier",
  "futures",
@@ -6332,7 +6355,7 @@ dependencies = [
 
 [[package]]
 name = "mc-db"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ethers",
  "kvdb-rocksdb",
@@ -6350,7 +6373,7 @@ dependencies = [
 
 [[package]]
 name = "mc-genesis-data-provider"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "anyhow",
  "jsonrpsee 0.16.3",
@@ -6388,7 +6411,7 @@ dependencies = [
 
 [[package]]
 name = "mc-mapping-sync"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "anyhow",
  "futures",
@@ -6411,7 +6434,7 @@ dependencies = [
 
 [[package]]
 name = "mc-rpc"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "anyhow",
  "blockifier",
@@ -6454,7 +6477,7 @@ dependencies = [
 
 [[package]]
 name = "mc-rpc-core"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "anyhow",
  "assert_matches",
@@ -6529,7 +6552,7 @@ dependencies = [
 
 [[package]]
 name = "mc-storage"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "blockifier",
  "frame-support",
@@ -6731,7 +6754,7 @@ dependencies = [
 
 [[package]]
 name = "mp-block"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "blockifier",
  "mp-fee",
@@ -6748,7 +6771,7 @@ dependencies = [
 
 [[package]]
 name = "mp-chain-id"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "mp-felt",
  "starknet-ff 0.3.5 (git+https://github.com/xJonathanLEI/starknet-rs.git?rev=64ebc36)",
@@ -6756,7 +6779,7 @@ dependencies = [
 
 [[package]]
 name = "mp-digest-log"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "assert_matches",
  "mp-block",
@@ -6766,7 +6789,7 @@ dependencies = [
 
 [[package]]
 name = "mp-fee"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "blockifier",
  "hashbrown 0.14.3",
@@ -6784,7 +6807,7 @@ dependencies = [
 
 [[package]]
 name = "mp-felt"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "cairo-vm",
  "hex",
@@ -6801,7 +6824,7 @@ dependencies = [
 
 [[package]]
 name = "mp-genesis-config"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "blockifier",
  "derive_more",
@@ -6816,7 +6839,7 @@ dependencies = [
 
 [[package]]
 name = "mp-hashers"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "mp-felt",
  "parity-scale-codec",
@@ -6828,7 +6851,7 @@ dependencies = [
 
 [[package]]
 name = "mp-messages"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "mp-transactions",
  "parity-scale-codec",
@@ -6841,7 +6864,7 @@ dependencies = [
 
 [[package]]
 name = "mp-program-hash"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "mp-felt",
  "starknet-ff 0.3.5 (git+https://github.com/xJonathanLEI/starknet-rs.git?rev=64ebc36)",
@@ -6849,7 +6872,7 @@ dependencies = [
 
 [[package]]
 name = "mp-sequencer-address"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "async-trait",
  "parity-scale-codec",
@@ -6860,7 +6883,7 @@ dependencies = [
 
 [[package]]
 name = "mp-simulations"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
@@ -6869,7 +6892,7 @@ dependencies = [
 
 [[package]]
 name = "mp-snos-output"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "assert_matches",
  "hex",
@@ -6884,7 +6907,7 @@ dependencies = [
 
 [[package]]
 name = "mp-state"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "blockifier",
  "mp-felt",
@@ -6897,7 +6920,7 @@ dependencies = [
 
 [[package]]
 name = "mp-storage"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "lazy_static",
  "parity-scale-codec",
@@ -6907,7 +6930,7 @@ dependencies = [
 
 [[package]]
 name = "mp-transactions"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "assert_matches",
  "blockifier",
@@ -7572,6 +7595,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-balances"
+version = "4.0.0-dev"
+source = "git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std#a41673f8aa3f24d7ed8fb1f246a97551eca58837"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "log",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-runtime 24.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-std 8.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+]
+
+[[package]]
 name = "pallet-grandpa"
 version = "4.0.0-dev"
 source = "git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std#a41673f8aa3f24d7ed8fb1f246a97551eca58837"
@@ -7592,6 +7630,60 @@ dependencies = [
  "sp-session",
  "sp-staking",
  "sp-std 8.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+]
+
+[[package]]
+name = "pallet-oracle"
+version = "4.0.0-dev"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "lite-json",
+ "log",
+ "parity-scale-codec",
+ "reqwest",
+ "scale-info",
+ "serde",
+ "sp-api",
+ "sp-arithmetic 16.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-core 21.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-inherents",
+ "sp-io 23.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-keystore 0.27.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-runtime 24.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-std 8.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+]
+
+[[package]]
+name = "pallet-orderbook"
+version = "4.0.0-dev"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "lite-json",
+ "log",
+ "mc-db",
+ "mp-digest-log",
+ "mp-hashers",
+ "mp-storage",
+ "pallet-starknet",
+ "pallet-starknet-runtime-api",
+ "parity-scale-codec",
+ "reqwest",
+ "scale-info",
+ "serde",
+ "sp-api",
+ "sp-arithmetic 16.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-core 21.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-inherents",
+ "sp-io 23.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-keystore 0.27.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-runtime 24.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-std 8.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-version",
+ "starknet_api",
 ]
 
 [[package]]
@@ -7618,7 +7710,7 @@ dependencies = [
 
 [[package]]
 name = "pallet-starknet"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "assert_matches",
  "blockifier",
@@ -7708,6 +7800,32 @@ dependencies = [
  "sp-std 8.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
  "sp-storage 13.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
  "sp-timestamp",
+]
+
+[[package]]
+name = "pallet-wuw"
+version = "4.0.0-dev"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "lite-json",
+ "log",
+ "pallet-balances",
+ "pallet-starknet",
+ "parity-scale-codec",
+ "reqwest",
+ "scale-info",
+ "serde",
+ "sp-api",
+ "sp-arithmetic 16.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-core 21.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-inherents",
+ "sp-io 23.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-keystore 0.27.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-runtime 24.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-std 8.0.0 (git+https://github.com/massalabs/polkadot-sdk?branch=release-polkadot-v1.3.0-std)",
+ "sp-version",
 ]
 
 [[package]]
@@ -13453,7 +13571,7 @@ checksum = "97fee6b57c6a41524a810daee9286c02d7752c4253064d0b05472833a438f675"
 dependencies = [
  "cfg-if",
  "digest 0.10.7",
- "rand 0.7.3",
+ "rand 0.8.5",
  "static_assertions",
 ]
 

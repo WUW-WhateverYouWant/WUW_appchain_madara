@@ -18,10 +18,56 @@ pub const GENESIS_ASSETS_FILE: &str = "genesis.json";
 
 /// Specialized `ChainSpec`. This is a specialization of the general Substrate ChainSpec type.
 pub type ChainSpec = sc_service::GenericChainSpec<RuntimeGenesisConfig>;
+use madara_runtime::AccountId;
+use madara_runtime::Signature;
+type AccountPublic = <Signature as Verify>::Signer;
+use sp_runtime::traits::Verify;
+use sp_runtime::AccountId32;
+use sp_core::sr25519;
+// /// Generate an account ID from seed.
+pub fn get_account_id_from_seed<TPublic: Public>(seed: &str) -> AccountId32
+where
+AccountId32: From<<TPublic::Pair as Pair>::Public>,
+{
+// AccountId32::from(get_from_seed::<TPublic>(seed)).into_account()
+AccountId32::from(get_from_seed::<TPublic>(seed))
+
+}
+
+pub fn get_endowed_accounts_with_balance() -> Vec<(AccountId32, u128)> {
+
+    let accounts: Vec<AccountId32> = vec![
+        get_account_id_from_seed::<sr25519::Public>("Alice"),
+        get_account_id_from_seed::<sr25519::Public>("Bob"),
+        get_account_id_from_seed::<sr25519::Public>("Charlie"),
+        get_account_id_from_seed::<sr25519::Public>("Dave"),
+        get_account_id_from_seed::<sr25519::Public>("Alice//stash"),
+        // get_account_id_from_seed::<sr25519::Public>("Bob//stash"),
+        // get_account_id_from_seed::<sr25519::Public>("Charlie//stash"),
+        // get_account_id_from_seed::<sr25519::Public>("Dave//stash"),
+    ];
+    // @TODO genesis balance management
+    // let accounts_with_balance: Vec<(AccountId32, u128)> = accounts.iter().cloned().map(|k| (k, 1 << 60)).collect();
+    let accounts_with_balance: Vec<(AccountId32, u128)> = accounts.iter().cloned().map(|k| (k, 10_000)).collect();
+    // let accounts_with_balance: Vec<(AccountId, u128)> = accounts.iter().cloned().map(|k| (k, 1 << 60)).collect();
+    // let json_data = &include_bytes!("../../seed/balances.json")[..];
+    // let additional_accounts_with_balance: Vec<(AccountId32, u128)> = serde_json::from_slice(json_data).unwrap();
+    // let mut accounts = additional_accounts_with_balance.clone();
+    // accounts_with_balance.iter().for_each(|tup1| {
+    //     // for tup2 in additional_accounts_with_balance.iter() {
+    //     //     if tup1.0 == tup2.0 {
+    //     //         return;
+    //     //     }
+    //     // }
+    //     accounts.push(tup1.to_owned());
+    // });
+    // accounts
+    accounts_with_balance
+}
 
 /// Specialized `ChainSpec` for development.
 pub type DevChainSpec = sc_service::GenericChainSpec<DevGenesisExt>;
-
+use madara_runtime::BalancesConfig;
 /// Extension for the dev genesis config to support a custom changes to the genesis state.
 #[derive(Serialize, Deserialize)]
 pub struct DevGenesisExt {
@@ -78,6 +124,7 @@ pub fn development_config(sealing: SealingMode, base_path: BasePath) -> Result<D
                     // Initial PoA authorities
                     vec![authority_keys_from_seed("Alice")],
                     true,
+                    get_endowed_accounts_with_balance(),
                 ),
                 sealing: sealing.clone(),
             }
@@ -136,6 +183,7 @@ pub fn local_testnet_config(base_path: BasePath, chain_id: &str) -> Result<Chain
                 // Intended to be only 2
                 vec![authority_keys_from_seed("Alice"), authority_keys_from_seed("Bob")],
                 true,
+                get_endowed_accounts_with_balance(),
             )
         },
         // Bootnodes
@@ -168,6 +216,7 @@ fn testnet_genesis(
     wasm_binary: &[u8],
     initial_authorities: Vec<(AuraId, GrandpaId)>,
     _enable_println: bool,
+    endowed_accounts: Vec<(AccountId32, u128)>, // endowed_accounts:Vec<AccountId32>
 ) -> RuntimeGenesisConfig {
     let starknet_genesis_config: madara_runtime::pallet_starknet::GenesisConfig<_> = genesis_loader.into();
 
@@ -186,5 +235,8 @@ fn testnet_genesis(
         },
         /// Starknet Genesis configuration.
         starknet: starknet_genesis_config,
+        balances: BalancesConfig {
+            balances: endowed_accounts
+        },
     }
 }
