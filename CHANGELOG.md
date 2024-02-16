@@ -2,12 +2,23 @@
 
 ## Next release
 
+- feat(rpc): add tests for estimateMessageFee RPC call
+- refacto: rename braavos call aggregator contract
+- fix: updating outdated links to external resources in documentation
+- feat(client/data-availability): implement custom error handling
+- fix: get_block_by_block_hash then default rather than error
+- feat(rpc): added `get_state_update` real values from DA db
+- feat: add transparent representation to `Felt252Wrapper`
+- feat(rpc/trace_api): add `trace_block_transaction`
+- chore(db): changed the way hashes are encoded
+
 ## v0.7.0
 
 - chore: release v0.7.0
 - refacto: remove abusive `TryInto` impl
 - dev: optimize tx trace creation
 - dev: make Madara std compatible
+- dev: check that class exist before using it in BuildGenesisConfig
 - CI: fix taplo version
 - chore: add cache usage for `getEvents` and `getTransactionReceipt`
 - fix: cairo1 contracts should be identified by their sierra class hash
